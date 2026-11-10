@@ -1,0 +1,1367 @@
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirti Arya | Data Analysis & Backend Portfolio</title>
+    <meta name="description" content="Kirti Arya's portfolio focused on data analysis, SQL, backend data management, and applied AI.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #08111f;
+            --bg-secondary: #0d1b2e;
+            --fg: #f8fafc;
+            --fg-muted: #9aabc1;
+            --accent: #67e8c5;
+            --accent-dim: rgba(103, 232, 197, 0.12);
+            --card: rgba(15, 31, 51, 0.78);
+            --border: rgba(148, 163, 184, 0.16);
+            --glow: rgba(103, 232, 197, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        /* Animated background */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            top: -200px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+            bottom: -100px;
+            left: -100px;
+            animation-delay: -7s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            top: 50%;
+            left: 30%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(-30px, -20px) scale(1.02); }
+        }
+
+        /* Grid pattern overlay */
+        .grid-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.3;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(8, 17, 31, 0.72);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--fg-muted);
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--fg);
+        }
+
+        .nav-link:focus-visible,
+        .nav-link.active {
+            color: var(--fg);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--accent);
+            color: var(--bg);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px var(--glow);
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--fg);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px var(--accent-dim);
+        }
+
+        /* Skill tag */
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background: var(--accent-dim);
+            border: 1px solid rgba(6, 214, 160, 0.3);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: var(--bg);
+            transform: scale(1.05);
+        }
+
+        /* Section reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered children */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(6) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 24px;
+            width: 2px;
+            height: calc(100% - 16px);
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        /* Project card icon */
+        .project-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-dim);
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 17, 31, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hamburger {
+            width: 32px;
+            height: 24px;
+            position: relative;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--fg);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 11px; }
+        .hamburger span:nth-child(3) { bottom: 0; }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 11px;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            bottom: 11px;
+        }
+
+        /* Focus states */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        /* Stats counter */
+        .stat-number {
+            font-size: clamp(2.25rem, 5vw, 3rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-scroll {
+            bottom: 1.5rem;
+            z-index: 2;
+        }
+
+        @media (max-height: 680px) {
+            .hero-scroll {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-stats {
+                gap: 1rem;
+            }
+
+            .hero-stats p {
+                font-size: 0.75rem;
+                line-height: 1.35;
+            }
+        }
+
+        /* Certification badge */
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .cert-badge:hover {
+            border-color: var(--accent);
+            transform: translateX(8px);
+        }
+
+        /* Floating particles canvas */
+        #particles-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-3 lg:px-12">
+        <div class="w-full flex items-center justify-between">
+            <a href="#about" class="text-lg md:text-xl font-bold tracking-tight" style="font-family: 'Space Grotesk', sans-serif;">
+                <span style="color: var(--accent);">Kirti</span> Arya
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="nav-link text-sm font-medium">About</a>
+                <a href="#projects" class="nav-link text-sm font-medium">Projects</a>
+                <a href="#experience" class="nav-link text-sm font-medium">Experience</a>
+                <a href="#skills" class="nav-link text-sm font-medium">Skills</a>
+                <a href="#contact" class="btn-primary text-sm py-3 px-6">Get in Touch</a>
+            </div>
+
+            <button class="hamburger md:hidden" id="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="flex flex-col items-center gap-8 stagger-children visible">
+            <a href="#about" class="text-2xl font-semibold hover:text-[var(--accent)] transition-colors mobile-nav-link">About</a>
+            <a href="#projects" class="text-2xl font-semibold hover:text-[var(--accent)] transition-colors mobile-nav-link">Projects</a>
+            <a href="#experience" class="text-2xl font-semibold hover:text-[var(--accent)] transition-colors mobile-nav-link">Experience</a>
+            <a href="#skills" class="text-2xl font-semibold hover:text-[var(--accent)] transition-colors mobile-nav-link">Skills</a>
+            <a href="#contact" class="btn-primary text-lg mt-4 mobile-nav-link">Get in Touch</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+            <div class="grid-pattern"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-12 lg:py-16">
+            <div class="max-w-4xl">
+                <div class="stagger-children visible" id="hero-content">
+                    <p class="text-[var(--accent)] font-medium mb-4 flex items-center gap-2">
+                        <span class="w-3 h-3 bg-[var(--accent)] rounded-full animate-pulse"></span>
+                        Biotechnology × Data Analytics
+                    </p>
+                    <h1 class="text-5xl md:text-7xl lg:text-[clamp(4.5rem,7vw,6.5rem)] font-bold mb-5 leading-tight">
+                        Hi, I'm<br>
+                        <span class="bg-gradient-to-r from-[var(--accent)] via-[#3b82f6] to-[#8b5cf6] bg-clip-text text-transparent">
+                            Kirti Arya
+                        </span>
+                    </h1>
+                    <p class="text-lg md:text-2xl text-[var(--fg-muted)] mb-7 max-w-2xl leading-relaxed">
+                        Biotechnology undergraduate building technology-focused solutions by turning raw data into reliable insights through
+                        <span class="text-[var(--fg)] font-medium">SQL</span>,
+                        <span class="text-[var(--fg)] font-medium">backend data management</span>, and
+                        <span class="text-[var(--fg)] font-medium">data analysis</span>, while applying biotechnology knowledge to real-world problems.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects" class="btn-primary">
+                            View My Work
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                            </svg>
+                        </a>
+                        <a href="#about" class="btn-secondary">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick stats -->
+                <div class="hero-stats grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-[var(--border)]">
+                    <div>
+                        <div class="stat-number">15+</div>
+                        <p class="text-[var(--fg-muted)] text-sm mt-1">Technical skills & tools</p>
+                    </div>
+                    <div>
+                        <div class="stat-number">5+</div>
+                        <p class="text-[var(--fg-muted)] text-sm mt-1">Applied data & AI projects</p>
+                    </div>
+                    <div>
+                        <div class="stat-number">5+</div>
+                        <p class="text-[var(--fg-muted)] text-sm mt-1">Hackathons</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hero-scroll absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--fg-muted)]">
+            <div class="w-6 h-10 border-2 border-[var(--border)] rounded-full flex justify-center pt-2">
+                <div class="w-1.5 h-3 bg-[var(--accent)] rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-6 lg:px-12 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="text-[var(--accent)] font-medium mb-4 uppercase tracking-widest text-sm">About Me</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        Biology as a<br>Foundation for Technology
+                    </h2>
+                    <div class="space-y-4 text-[var(--fg-muted)] text-lg leading-relaxed">
+                        <p>
+                        I'm a <strong class="text-[var(--fg)]">Biotechnology undergraduate</strong> who applies SQL, backend systems, and data analysis to real-world problems.
+                        </p>
+                        <p>
+                        I turn structured data into clear, actionable insight using Python, SQL, and practical analytical workflows.
+                        </p>
+                        <p>
+                        My focus spans biotechnology, bioinformatics, backend data management, and responsible AI.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 p-6 rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+                        <p class="text-[var(--accent)] italic text-lg">
+                            "Making data useful, trustworthy, and ready for decisions."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="reveal" style="transition-delay: 0.2s;">
+                    <div class="card p-8">
+                        <h3 class="text-xl font-semibold mb-6">Education</h3>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--accent)] to-blue-500 flex items-center justify-center shrink-0">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg">Thapar Institute of Engineering & Technology</h4>
+                                <p class="text-[var(--accent)] font-medium">B.Tech Biotechnology · 2024–Present</p>
+                                <p class="text-[var(--fg-muted)] text-sm mt-1">Patiala, Punjab, India</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-8 border-t border-[var(--border)]">
+                            <h4 class="font-medium mb-4 text-[var(--fg-muted)]">Focus Areas</h4>
+
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">SQL & Databases</span>
+                                <span class="skill-tag">Data Analysis</span>
+                                <span class="skill-tag">Backend Systems</span>
+                                <span class="skill-tag">Bioinformatics</span>
+                                <span class="skill-tag">Computer Vision</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 px-6 lg:px-12 relative bg-[var(--bg-secondary)]">
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute top-1/2 right-0 w-96 h-96 bg-[var(--accent)] rounded-full filter blur-[150px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16 reveal">
+                <p class="text-[var(--accent)] font-medium mb-4 uppercase tracking-widest text-sm">Portfolio</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Featured Projects</h2>
+            </div>
+
+            <div class="space-y-8 stagger-children" id="projects-container">
+                <!-- AI Travel Copilot -->
+                <article class="card p-8 md:p-10">
+                    <div class="md:flex md:items-start md:gap-8">
+                        <div class="project-icon shrink-0">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="10" r="3"/>
+                                <path d="M12 21s7-6.1 7-11a7 7 0 0 0-14 0c0 4.9 7 11 7 11z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">AI Travel Copilot</h3>
+                                    <p class="text-[var(--accent)] text-sm font-medium">Full-Stack AI Application · Budget Travel Planning</p>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <a href="https://travel-co-pilot.netlify.app/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full bg-[var(--accent-dim)] text-[var(--accent)] text-sm font-semibold hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors">
+                                        Live Demo
+                                    </a>
+                                    <a href="https://github.com/Tanveer4350/Ai-Travel-Co-pilot" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full border border-[var(--border)] text-[var(--fg-muted)] text-sm font-semibold hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="text-[var(--fg-muted)] mb-6 leading-relaxed">
+                                Built a full-stack AI travel planning application that generates personalized, budget-friendly itineraries from user preferences.
+                                Users can create day-wise trip plans, refine them with <strong class="text-[var(--fg)]">natural-language requests</strong>,
+                                and revisit saved trip history through an interactive web interface.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">FastAPI</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Python</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">React</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">REST API</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Groq API</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Research Project -->
+                <article class="card p-8 md:p-10">
+                    <div class="md:flex md:items-start md:gap-8">
+                        <div class="project-icon shrink-0">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 3v18M3 12h18"/>
+                                <circle cx="12" cy="12" r="8"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Deep Learning-Based Ischemic Stroke Detection</h3>
+                                    <p class="text-[var(--accent)] text-sm font-medium">Research Project · ELC, Thapar Institute · Jun–Jul 2026</p>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-4 py-2 rounded-full bg-[var(--accent-dim)] text-[var(--accent)] text-sm font-semibold">
+                                        0.9525 Mean AUC
+                                    </span>
+                                    <a href="https://github.com/akirti043-create" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full border border-[var(--border)] text-[var(--fg-muted)] text-sm font-semibold hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="text-[var(--fg-muted)] mb-6 leading-relaxed">
+                                Developed a 2D non-contrast CT deep learning framework for ischemic stroke detection, combining
+                                <strong class="text-[var(--fg)]">Inception-v3 classification</strong> with U-Net++ lesion segmentation
+                                using an EfficientNet-B4 encoder. Improved mean AUC from 0.9417 to 0.9525 and achieved 64.41% Dice
+                                and 54.55% IoU for lesion segmentation.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Python</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Inception-v3</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">U-Net++</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">EfficientNet-B4</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Medical Imaging</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 1 -->
+                <article class="card p-8 md:p-10">
+                    <div class="md:flex md:items-start md:gap-8">
+                        <div class="project-icon shrink-0">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Food Freshness & Quality Classification System</h3>
+                                    <p class="text-[var(--accent)] text-sm font-medium">Deep Learning / Computer Vision</p>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-4 py-2 rounded-full bg-green-500/20 text-green-400 text-sm font-semibold">
+                                        90-95% Accuracy
+                                    </span>
+                                    <a href="https://github.com/akirti043-create/food-freshness-classifier" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full border border-[var(--border)] text-[var(--fg-muted)] text-sm font-semibold hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <p class="text-[var(--fg-muted)] mb-6 leading-relaxed">
+                                Designed a deep learning computer vision system to evaluate food freshness from images using transfer learning 
+                                with <strong class="text-[var(--fg)]">MobileNetV2 architecture</strong>. Applied image preprocessing, augmentation, 
+                                and validation techniques to improve model robustness and generalizability for food safety monitoring and 
+                                automated quality assessment.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Python</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">TensorFlow</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">MobileNetV2</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Transfer Learning</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Data Augmentation</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="card p-8 md:p-10">
+                    <div class="md:flex md:items-start md:gap-8">
+                        <div class="project-icon shrink-0">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Epileptic Seizure Detection using EEG Signals</h3>
+                                    <p class="text-[var(--accent)] text-sm font-medium">Signal Processing / Medical AI</p>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-4 py-2 rounded-full bg-purple-500/20 text-purple-400 text-sm font-semibold">
+                                        High Accuracy
+                                    </span>
+                                    <a href="https://github.com/akirti043-create/Epilepsy-Seizure-Detection-Using-EEG" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full border border-[var(--border)] text-[var(--fg-muted)] text-sm font-semibold hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <p class="text-[var(--fg-muted)] mb-6 leading-relaxed">
+                                Explored seizure detection using the <strong class="text-[var(--fg)]">Bonn University EEG dataset</strong>. 
+                                Preprocessed and analyzed EEG signal data to build a binary classification pipeline distinguishing normal and seizure states. 
+                                Trained a CNN model for EEG signal classification with high accuracy and minimal misclassifications, highlighting 
+                                AI's potential in neurological disorder diagnostics.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Python</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">CNN</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">EEG Analysis</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Signal Processing</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Medical Diagnostics</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="card p-8 md:p-10">
+                    <div class="md:flex md:items-start md:gap-8">
+                        <div class="project-icon shrink-0">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="20" x2="18" y2="10"/>
+                                <line x1="12" y1="20" x2="12" y2="4"/>
+                                <line x1="6" y1="20" x2="6" y2="14"/>
+                                <line x1="2" y1="20" x2="22" y2="20"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-2">Comparative Financial Analysis Dashboard</h3>
+                                    <p class="text-[var(--accent)] text-sm font-medium">Financial Analytics / Data Visualization</p>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-4 py-2 rounded-full bg-blue-500/20 text-blue-400 text-sm font-semibold">
+                                        Interactive
+                                    </span>
+                                    <a href="https://github.com/akirti043-create/comparative-financial-analysis-indian-pharma-excel" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full border border-[var(--border)] text-[var(--fg-muted)] text-sm font-semibold hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <p class="text-[var(--fg-muted)] mb-6 leading-relaxed">
+                                Analyzed the financial performance of five leading Indian pharmaceutical companies using Microsoft Excel. 
+                                Calculated and compared key financial metrics including profitability ratios, liquidity ratios, and growth indicators. 
+                                Developed an <strong class="text-[var(--fg)]">interactive Excel dashboard</strong> to visualize business performance 
+                                and enable data-driven decision making.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Microsoft Excel</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Financial Modeling</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Dashboard Design</span>
+                                <span class="px-3 py-1 rounded-lg bg-[var(--bg)] text-sm text-[var(--fg-muted)]">Pharma Industry</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-32 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <p class="text-[var(--accent)] font-medium mb-4 uppercase tracking-widest text-sm">Journey</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Experience & Roles</h2>
+                    <p class="text-[var(--fg-muted)] text-lg mb-12">
+                        Building from a biotechnology foundation while developing practical skills in data analysis, SQL-backed systems, AI, and data-driven problem solving.
+                    </p>
+
+                    <div class="space-y-12">
+                        <div class="timeline-item reveal">
+                            <div class="card p-6 ml-4">
+                                <span class="text-[var(--accent)] text-sm font-medium">Jan 2025 – Present</span>
+                                <h3 class="text-xl font-bold mt-2">Core Member · TICC</h3>
+                                <p class="text-[var(--fg)] font-medium">Thapar Institute Consulting Club (TICC)</p>
+                                <p class="text-[var(--fg-muted)] mt-3 text-sm leading-relaxed">
+                                    Contributing to club outreach, event promotion, and digital engagement initiatives. Participating in consulting case discussions involving market analysis, audience insights, and strategic problem-solving.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item reveal" style="transition-delay: 0.15s;">
+                            <div class="card p-6 ml-4">
+                                <span class="text-[var(--fg-muted)] text-sm font-medium">Jun 2026 – Jul 2026</span>
+                                <h3 class="text-xl font-bold mt-2">Research Project · Ischemic Stroke Detection</h3>
+                                <p class="text-[var(--fg)] font-medium">Experiential Learning Center (ELC), Thapar Institute</p>
+                                <p class="text-[var(--fg-muted)] mt-3 text-sm leading-relaxed">
+                                    Developed a 2D non-contrast CT deep learning framework for ischemic stroke detection during a research project at the Experiential Learning Center. Combined Inception-v3 classification with U-Net++ lesion segmentation using an EfficientNet-B4 encoder, improving mean AUC from 0.9417 to 0.9525.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="reveal" style="transition-delay: 0.25s;">
+                    <p class="text-[var(--accent)] font-medium mb-4 uppercase tracking-widest text-sm">Achievements</p>
+                    <h3 class="text-2xl font-bold mb-8">Certifications</h3>
+
+                    <div class="space-y-4">
+                        <div class="cert-badge">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--accent)] to-emerald-500 flex items-center justify-center shrink-0">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="8" r="7"/>
+                                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Maximize Productivity with AI Tools</h4>
+                                <p class="text-[var(--fg-muted)] text-sm">Google · Coursera</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-badge">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center shrink-0">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Bioinformatics with Cancer Research Workshop</h4>
+                                <p class="text-[var(--fg-muted)] text-sm">IIT Ropar · Ethical Edufabrica</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-badge">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-pink-500 flex items-center justify-center shrink-0">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">AI Sustainability Hackathon</h4>
+                                <p class="text-[var(--fg-muted)] text-sm">International · Participant</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-32 px-6 lg:px-12 relative bg-[var(--bg-secondary)]">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[150px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16 reveal">
+                <p class="text-[var(--accent)] font-medium mb-4 uppercase tracking-widest text-sm">Expertise</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Technical & Non-Technical Skills</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <!-- Data & Backend -->
+                <div class="card p-8 reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <ellipse cx="12" cy="5" rx="8" ry="3"/>
+                            <path d="M4 5v7c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/>
+                            <path d="M4 12v7c0 1.66 3.58 3 8 3s8-1.34 8-3v-7"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Data & Backend</h3>
+                    <ul class="space-y-3 text-[var(--fg-muted)]">
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            SQL & Relational Databases
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Database Schema Design
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Joins, CTEs & Aggregations
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Data Cleaning & Validation
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Python Data Workflows
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- AI & ML -->
+                <div class="card p-8 reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--accent)] to-teal-500 flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">AI & Machine Learning</h3>
+                    <ul class="space-y-3 text-[var(--fg-muted)]">
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span>
+                            Python Programming
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span>
+                            Convolutional Neural Networks (CNN)
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span>
+                            Transfer Learning
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span>
+                            Computer Vision
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span>
+                            Deep Learning Architectures
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Laboratory Skills -->
+                <div class="card p-8 reveal" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 3h6"/>
+                            <path d="M10 3v6l-4 11h12l-4-11V3"/>
+                            <path d="M10 9h4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Biotechnology & Lab Skills</h3>
+                    <ul class="space-y-3 text-[var(--fg-muted)]">
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-violet-400"></span>
+                            ELISA (Enzyme-Linked Immunosorbent Assay)
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-violet-400"></span>
+                            PCR (Polymerase Chain Reaction)
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-violet-400"></span>
+                            Bioinformatics Analysis
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-violet-400"></span>
+                            Molecular Biology Methods
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-violet-400"></span>
+                            Cell Culture Techniques
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Analytical Skills -->
+                <div class="card p-8 reveal" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+                            <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Analytical Skills</h3>
+                    <ul class="space-y-3 text-[var(--fg-muted)]">
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            Financial Statement Analysis
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            Corporate Finance Fundamentals
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            Data Analysis & Interpretation
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            Statistical Analysis
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            Business Intelligence
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tools Grid -->
+            <div class="mt-16 reveal">
+                <h3 class="text-center text-xl font-semibold mb-8 text-[var(--fg-muted)]">Tools & Technologies</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="skill-tag">
+                        <svg class="mr-2" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Git & GitHub
+                    </div>
+                    <div class="skill-tag">
+                        <svg class="mr-2" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.75 3A1.75 1.75 0 002 4.75v14.5c0 .966.784 1.75 1.75 1.75h16.5A1.75 1.75 0 0022 19.25V4.75A1.75 1.75 0 0020.25 3H3.75zM2.5 4.75a1.25 1.25 0 011.25-1.25h16.5a1.25 1.25 0 011.25 1.25v14.5a1.25 1.25 0 01-1.25 1.25H3.75a1.25 1.25 0 01-1.25-1.25V4.75z"/><path d="M8.68 8.28a.75.75 0 010 1.06L7.06 10.96l1.62 1.62a.75.75 0 01-1.06 1.06l-2.155-2.154a.75.75 0 010-1.06L7.62 8.28a.75.75 0 011.06 0zm6.64 0a.75.75 0 011.06 0l2.155 2.155a.75.75 0 010 1.06L16.38 13.64a.75.75 0 01-1.06-1.06l1.62-1.62-1.62-1.62a.75.75 0 010-1.06z"/></svg>
+                        VS Code
+                    </div>
+                    <div class="skill-tag">
+                        <svg class="mr-2" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h11.377v11.372H0V0zm12.623 0H24v11.372H12.623V0zM0 12.623h11.377V24H0V12.623zm12.623 0H24V24H12.623V12.623z"/></svg>
+                        Microsoft Excel
+                    </div>
+                    <div class="skill-tag">
+                        <svg class="mr-2" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>
+                        Jupyter Notebook
+                    </div>
+                    <div class="skill-tag">
+                        <svg class="mr-2" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-.041 4.705c.798 0 1.455.632 1.455 1.416s-.657 1.416-1.455 1.416-1.455-.632-1.455-1.416.657-1.416 1.455-1.416zM9.5 9.5h5v8h-1.5v-6.5h-2V17.5H9.5v-8z"/></svg>
+                        Python
+                    </div>
+                    <div class="skill-tag">
+                        <svg class="mr-2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12v7c0 1.66 3.58 3 8 3s8-1.34 8-3v-7"/></svg>
+                        SQL
+                    </div>
+                    <div class="skill-tag">
+                        <svg class="mr-2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12v7c0 1.66 3.58 3 8 3s8-1.34 8-3v-7"/></svg>
+                        PostgreSQL
+                    </div>
+                    <div class="skill-tag">
+                        <svg class="mr-2" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/></svg>
+                        TensorFlow
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6 lg:px-12 relative">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--accent)] rounded-full filter blur-[200px] opacity-10"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
+            <p class="text-[var(--accent)] font-medium mb-4 uppercase tracking-widest text-sm">Get In Touch</p>
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">Let's Work Together</h2>
+            <p class="text-xl text-[var(--fg-muted)] mb-12 max-w-2xl mx-auto">
+                I'm open to biotechnology internships, research collaborations, and technology-focused opportunities where SQL, backend data systems, and analysis can create measurable impact.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="mailto:akirti043@gmail.com" class="btn-primary text-lg py-4 px-8">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Send Email
+                </a>
+                <a href="https://www.linkedin.com/in/kirti-arya-56451135b?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener noreferrer" class="btn-secondary text-lg py-4 px-8">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                    LinkedIn Profile
+                </a>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8">
+                <a href="#" class="card p-6 text-left hover:border-[var(--accent)] transition-colors" aria-label="Add resume link">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-[var(--accent-dim)] flex items-center justify-center shrink-0">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-[var(--fg)]">View Resume</h3>
+                            <p class="text-sm text-[var(--fg-muted)]">Add resume link here</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://github.com/akirti043-create" target="_blank" rel="noopener noreferrer" class="card p-6 text-left hover:border-[var(--accent)] transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-[var(--accent-dim)] flex items-center justify-center shrink-0">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-[var(--fg)]">GitHub Projects</h3>
+                            <p class="text-sm text-[var(--fg-muted)]">Explore the code</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-[var(--border)]">
+        <div class="w-full flex flex-col md:flex-row items-center justify-between gap-4 text-[var(--fg-muted)] text-sm">
+            <p>© 2026 Kirti Arya. All rights reserved.</p>
+            <p>Biotechnology · Data Analysis · SQL · Backend Systems · AI/ML</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize variables first
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Particle system configuration
+        let particles = [];
+        let animationId = null;
+        const particleCount = 50;
+
+        // Resize canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        // Create particle
+        function createParticle() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.max(1, Math.random() * 2 + 0.5),
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                alpha: Math.random() * 0.5 + 0.2
+            };
+        }
+
+        // Initialize particles
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(createParticle());
+            }
+        }
+
+        // Animate particles
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((particle, index) => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+
+                if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(103, 232, 197, ${particle.alpha})`;
+                ctx.fill();
+
+                // Connect nearby particles
+                particles.slice(index + 1).forEach(otherParticle => {
+                    const dx = particle.x - otherParticle.x;
+                    const dy = particle.y - otherParticle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(otherParticle.x, otherParticle.y);
+                        const lineAlpha = (1 - distance / 120) * 0.15;
+                        ctx.strokeStyle = `rgba(103, 232, 197, ${Math.max(0, lineAlpha)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            animationId = requestAnimationFrame(animateParticles);
+        }
+
+        // Initialize canvas
+        resizeCanvas();
+        initParticles();
+        
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!prefersReducedMotion) {
+            animateParticles();
+        }
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu when clicking nav links
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Scroll reveal with Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .stagger-children').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        const navbar = document.querySelector('nav');
+        let lastScrollY = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 100) {
+                navbar.style.background = 'rgba(10, 15, 26, 0.9)';
+                navbar.style.backdropFilter = 'blur(20px)';
+                navbar.style.borderBottom = '1px solid var(--border)';
+            } else {
+                navbar.style.background = 'rgba(8, 17, 31, 0.72)';
+                navbar.style.backdropFilter = 'blur(18px)';
+                navbar.style.borderBottom = '1px solid var(--border)';
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+    </script>
+</body>
+</html>
